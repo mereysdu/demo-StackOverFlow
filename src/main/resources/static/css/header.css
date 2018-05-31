@@ -1,0 +1,79 @@
+.head{
+    background-color: #00c3ff;
+    height: 55px;
+    padding-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 80%;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    padding-top: 10px;
+    height: 45px;
+    opacity: 1;
+}
+
+
+#myLogo{
+    background-image: url('../images/whitelogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 30px;
+    padding: 0;
+    background-color: red;
+}
+
+
+.head div{
+    display: inline-block;
+}
+.head-words{
+    margin-right: 50px;
+    float: left;
+    height: 25px;
+    padding: 5px 0 0;
+    color: #eaf0f2;
+    font-weight: bold;
+}
+.head-words a{
+    color: #dae4e8;
+    text-decoration: none;
+}
+.head-words a:hover{
+    color: white;
+}
+
+
+
+.sign{
+    float: right;
+    border: 2px white solid;
+    height: 25px;
+    padding: 5px 0 0 25px;
+    width: 75px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.sign:hover{
+    background-color: white;
+    color: #00c3ff;
+    cursor: pointer;
+}
+
+#check{
+    color:white;
+    font-weight: bold;
+}
+
+
+#goto_posts{
+    color:white;
+    font-weight: bold;
+}
+
+

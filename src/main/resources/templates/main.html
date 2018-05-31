@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="utf-8">
+    <title>Main page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"  th:href="@{/css/main.css}">
+    <script th:src="@{/js/imageScript.js}"></script>
+</head>
+<body>
+
+
+
+<div class="head" role="tablist">
+    <div class="head-words" id="myLogo">
+    </div>
+    <div class="head-words" >
+        <a href="#comments-logout" role="tab"  data-toggle="tab">Posts</a>
+    </div>
+    <div class="head-words">
+        <a href="#add-comment"  role="tab"  data-toggle="tab">Add post</a>
+    </div>
+    <div class="head-words">
+        <a href="#account-settings"  role="tab"  data-toggle="tab">Settings</a>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="head-words">
+        <a href="#admin"  role="tab"  data-toggle="tab">Admin page</a>
+    </div>
+    <div class="sign" >
+        <form class="login" th:action="@{/logout}" method="get">
+            <div class="submit">
+                <input type="submit" value="Logout">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="tab-content">
+            <div class="tab-pane active" id="comments-logout">
+                <ul class="media-list">
+                    <li class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <input class="form-control" name="search" id="search" rows="5" placeholder="Type to search for question"></input>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="form-horizontal" th:if="${#lists.isEmpty(posts)}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <h1 class="media-heading text-uppercase reviews">No questions yet!</h1>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media" th:each="post : ${posts}">
+                        <a class="pull-left" href="#">
+                            <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                        </a>
+                        <div class="media-body">
+                            <div class="well well-lg">
+                                <h4 class="media-heading text-uppercase reviews"><a th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}"></a></h4>
+                                <ul class="media-date text-uppercase reviews list-inline">
+                                    <li class="dd" th:text="${post.date.dayOfMonth}"></li>
+                                    <li class="mm" th:text="${post.date.month}"></li>
+                                    <li class="aaaa" th:text="${post.date.year}"></li>
+                                </ul>
+                                <p class="media-comment" th:text="${post.text}">
+                                </p>
+
+                                <!-- <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+                                <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> 2 comments</a> -->
+                            </div>
+                        </div>
+                        <div class="collapse" id="replyOne">
+                            <ul class="media-list">
+                                <li class="media media-replied">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> The Hipster</h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd">22</li>
+                                                <li class="mm">09</li>
+                                                <li class="aaaa">2014</li>
+                                            </ul>
+                                            <p class="media-comment">
+                                                Nice job Maria.
+                                            </p>
+                                            <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="media media-replied" id="replied">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="https://pbs.twimg.com/profile_images/442656111636668417/Q_9oP8iZ.jpeg" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Mary</h4></h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd">22</li>
+                                                <li class="mm">09</li>
+                                                <li class="aaaa">2014</li>
+                                            </ul>
+                                            <p class="media-comment">
+                                                Thank you Guys!
+                                            </p>
+                                            <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="add-comment">
+                <form th:action="@{/main}" th:object="${postForm}" method="post" class="form-horizontal" id="commentForm" role="form" >
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <input th:field="*{title}" class="form-control" name="addTitle" id="addTitle" rows="5" placeholder="Title"></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="email" class="col-sm-2 control-label">Comment</label> -->
+                        <div class="col-sm-8">
+                            <textarea th:field="*{description}" class="form-control" name="addComment" id="addComment" rows="5" placeholder="Type your request"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <div class="input-group image-preview">
+                                <input th:field="*{filename}" type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                                <span class="input-group-btn">
+                      <!-- image-preview-clear button -->
+                      <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                          <span class="glyphicon glyphicon-remove"></span> Clear
+                      </button>
+                                    <!-- image-preview-input -->
+                      <div class="btn btn-default image-preview-input">
+                          <span class="glyphicon glyphicon-folder-open"></span>
+                          <span class="image-preview-input-title">Browse</span>
+                          <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                      </div>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Send post</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="account-settings">
+                <form action="#" method="post" class="form-horizontal" id="accountSetForm" role="form">
+                    <div class="form-group">
+                        <label for="avatar" class="col-sm-2 control-label">Avatar</label>
+                        <div class="col-sm-10">
+                            <div class="custom-input-file">
+                                <label class="uploadPhoto">
+                                    Edit
+                                    <input type="file" class="change-avatar" name="avatar" id="avatar">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Vilma palma">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nickName" class="col-sm-2 control-label">Nick name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="nickName" id="nickName" placeholder="Vilma">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="vilma@mail.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword" class="col-sm-2 control-label">New password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="newPassword" id="newPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" class="col-sm-2 control-label">Confirm password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="admin">
+                <ul class="media-list">
+                    <li class="media" th:each="post : ${unmoderatedPosts}">
+                        <a class="pull-left" href="#">
+                            <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                        </a>
+                        <div class="media-body">
+                            <div class="well well-lg">
+                                <h4 class="media-heading text-uppercase reviews"><a href="#" th:text="${post.title}"></a></h4>
+                                <ul class="media-date text-uppercase reviews list-inline">
+                                    <li class="dd" th:text="${post.date.dayOfMonth}"></li>
+                                    <li class="mm" th:text="${post.date.month}"></li>
+                                    <li class="aaaa" th:text="${post.date.year}"></li>
+                                </ul>
+                                <p class="media-comment" th:text="${post.text}">
+                                </p>
+                                <a th:href="@{'/moderation/posts/' + ${post.id} + '?action=accept'}" class="btn btn-warning btn-circle text-uppercase"><span class="glyphicon glyphicon-ok"></span>accept</a>
+                                <a th:href="@{'/moderation/posts/' + ${post.id} + '?action=decline'}" class="btn btn-info btn-circle text-uppercase"><span class="glyphicon glyphicon-remove"></span>delete</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

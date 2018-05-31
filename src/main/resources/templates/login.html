@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="head" id="myHeader">
+    <div class="head-words" id="myLogo">
+    </div>
+    <div class="head-words">
+        <a th:href="@{/about}"  id="check">About us</a>
+    </div>
+    <div class="head-words">
+        <a th:href="@{/main}"  id="goto_posts">Posts</a>
+    </div>
+    <div class="head-words">
+        <a href="#">Reviews</a>
+    </div>
+    <div class="sign" >
+        <form class="login" th:action="@{/login}" method="post">
+            <div class="input">
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="input">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="submit">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="right">
+    <form th:object="${createUserForm}" action="#" th:action = "@{/users}" method="post">
+        <div class="Registration">
+            <div class="Regtext">
+                <h2>Создать аккаунт</h2>
+            </div>
+            <div class="input">
+                <input type="text" name="name" placeholder="Имя" th:field="*{name}">
+            </div>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></div>
+            <div class="input">
+                <input type="text" name="surname" placeholder="Фамилия" th:field="*{surname}">
+            </div>
+            <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="validation-message"></div>
+            <div class="input">
+                <input type="text" name="number" placeholder="Телефон" th:field="*{number}">
+            </div>
+            <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="validation-message"></div>
+            <div class="input">
+                <input type="password" name="password" placeholder="Пароль" th:field="*{password}">
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></div>
+            <div class="input">
+                <input type="password" name="password" placeholder="Confirm Password" th:field="*{passwordConfirm}">
+            </div>
+            <div th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="validation-message"></div>
+            <div class="input">
+                <input type="email" name="email" placeholder="Email" th:field="*{email}">
+            </div>
+
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></div>
+
+
+            <!--<form class="radio-btn" th:field="*{gender}">-->
+                <!--<label style="margin-right:20px">-->
+                    <!--<input type="radio" name="gender">Мужчина-->
+                <!--</label>-->
+                <!--<label>-->
+                    <!--<input type="radio" name="gender">Женщина-->
+                <!--</label>-->
+             <!--</form>-->
+
+            <div th:if="${passwordsMissMatch} == 'true'" class="validation-message">Passwords Doesn't Match!</div>
+            <button class="submit" type="submit" text="Создать Аккаунт">
+                Создать Аккаунт
+            </button>
+            <div th:utext="${ok}" class="success-ok"></div>
+
+
+        </div>
+    </form>
+
+
+
+</div>
+</body>
+</html>

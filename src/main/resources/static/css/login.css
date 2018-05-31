@@ -1,0 +1,212 @@
+body{
+    margin:0;
+    padding: 0;
+    background-color: #f4f7f9;
+}
+
+
+.head{
+    background-color: #00c3ff;
+    height: 55px;
+    padding-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 80%;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    padding-top: 10px;
+    height: 45px;
+    opacity: 1;
+}
+
+
+#myLogo{
+    background-image: url('../images/whitelogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 30px;
+    padding: 0;
+}
+
+
+.head div{
+    display: inline-block;
+}
+.head-words{
+    margin-right: 50px;
+    float: left;
+    height: 25px;
+    padding: 5px 0 0;
+    color: #eaf0f2;
+    font-weight: bold;
+}
+.head-words a{
+    color: #dae4e8;
+    text-decoration: none;
+}
+.head-words a:hover{
+    color: white;
+}
+
+
+
+
+
+.sign{
+    float: right;
+    height: 25px;
+    width: 350px;
+}
+
+.sign .input{
+    font-size: 20px;
+    border: 1px #00938c solid;
+    border-radius: 2px;
+    height: 25px;
+    width: 37%;
+    background-color: white;
+}
+
+.sign .input input{
+    border: none;
+    outline-width: 0;
+    width: 90%;
+    height: 21px;
+    margin-left: 5%;
+}
+
+.sign .submit{
+    width: 22%;
+    height: 26px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.sign .submit input{
+    border: 1px white solid;
+    height: 100%;
+    width: 100%;
+    background-color: #00c3ff;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.sign .submit input:hover{
+    background-color: white;
+    color: #00c3ff;
+    cursor: pointer;
+}
+
+
+#check{
+    color:white;
+    font-weight: bold;
+}
+
+
+#goto_posts{
+    color:white;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.right{
+    float: left;
+    width: 100%;
+    background-color: #f4f7f9;
+}
+
+.Registration{
+    color: #00938c;
+    padding-top: 1px;
+    background-color: white;
+    min-height: 400px;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 30px;
+    border-radius: 5px;
+
+}
+
+.Registration .Regtext{
+    margin: 0 0 0 21%;
+}
+
+
+.Registration .input{
+    font-size: 20px;
+    border: 1px #00938c solid;
+    border-radius: 5px;
+    height: 30px;
+    width: 76%;
+    margin-top: 20px;
+    margin-left: 12%;
+}
+
+.Registration .input input{
+    border: none;
+    outline-width: 0;
+    width: 90%;
+    height: 28px;
+    margin-left: 5%;
+}
+
+.Registration .submit{
+    border: none;
+    height: 30px;
+    width: 48%;
+    background-color: #00938c;
+    margin: 20px 0 10px 40%;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+.Registration .radio-btn{
+    font-size: 20px;
+    height: 30px;
+    width: 76%;
+    margin-top: 20px;
+    margin-left: 12%;
+}
+
+.Registration .validation-message{
+    color: red;
+    width: 76%;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    margin-left: 12%;
+}
+
+.Registration .success-ok{
+    color:green;
+    width: 76%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 12%;
+}
+
+.left .headwords{
+    height: 50px;
+    width: auto;
+    margin: 25%;
+}
+
+.left .headwords h1{
+    float: left;
+    margin: 0;
+}
+
+.left .headwords h2{
+    float: left;
+    margin: 4px 0 0 10px;
+}

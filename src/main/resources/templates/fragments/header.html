@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:fragment="header-css">
+        <link rel="stylesheet" th:href="@{/css/header.css}" />
+    </div>
+
+</head>
+<body>
+    <div th:fragment="header">
+        <div class="head" id="myHeader">
+            <div class="head-words" id="myLogo">
+            </div>
+            <div class="head-words">
+                <a href="#" id="check">About us</a>
+            </div>
+            <div class="head-words">
+                <a href="/main" id="goto_posts">Posts</a>
+            </div>
+            <div class="head-words">
+                <a href="#">Reviews</a>
+            </div>
+            <div class="sign">
+                Sign in
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

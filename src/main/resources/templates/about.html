@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>About us</title>
+    <link rel="stylesheet" th:href="@{/css/about.css}" />
+</head>
+<body>
+<div class="head" id="myHeader">
+    <div class="head-words" id="logo">
+    </div>
+    <div class="head-words">
+        <a th:href="@{/about}"  id="check">About us</a>
+    </div>
+    <div class="head-words">
+        <a th:href="@{/main}"  id="goto_posts">Posts</a>
+    </div>
+    <div class="head-words">
+        <a href="">Reviews</a>
+    </div>
+    <div sec:authorize="isAuthenticated()" class="head-words">
+        <a href="">You are logged in</a>
+    </div>
+    <form sec:authorize="isAnonymous()" th:action="@{/login}" class="sign">
+        <input type="submit" value="Sign up">
+    </form>
+
+</div>
+
+<div class="head2">
+    <h2>We started with simple, but helpful idea:</h2>
+    <h1>Let neighbors be kinder and make the world more beautiful and happier</h1>
+    <h2>#LoveYourCommunity</h2>
+</div>
+
+<div class="about" id="afterHead">
+    <h1>Join us and help our community</h1>
+    <div class="image"></div>
+    <div class="words">
+        <h3>With us you can easily ask for help your community </h3>
+    </div>
+    <div class="image2"></div>
+    <div class="words">
+        <h3>Just by clicking you can send your request to your neighbors and
+            who has solution will help you by answering to your request</h3>
+    </div>
+    <div class="image3"></div>
+    <div class="words">
+        <h3> You can see what your neighbors need and help them :) </h3>
+    </div>
+</div>
+
+<div class="ads">
+    <h2>See what</h2>
+    <h1>your neighbors need</h1>
+    <hr>
+    <div class="htags">
+        <p>#INeedAnAxe</p>
+        <p>#WouldYouHelpMeWithCrane</p>
+        <div class="left-profile">
+            <div class="top">
+                <img th:src="@{images/ava.png}" alt="ava">
+                <h5>David Bobby</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/mobile.png}" alt="mobile">
+                <h5>87758328845</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/home.png}" alt="home">
+                <h5>Asyl Arman 11/155</h5>
+            </div>
+            <div class="top2">
+            </div>
+            <div class="top3">
+                <p>I need a mantle for one day. Who has could you be kind to help me)</p>
+            </div>
+        </div>
+        <div class="left-profile" style="margin-left:5%;">
+            <div class="top">
+                <img th:src="@{/images/logow.png}" alt="ava">
+                <h5>Aigerim Tulegenova</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/mobile.png}" alt="mobile">
+                <h5>87053456479</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/home.png}" alt="home">
+                <h5>Asyl Arman 7/255</h5>
+            </div>
+            <div class="top3">
+                <p>Can someone help me with crane. There water is going under of crane. If someone knows, pls help me :(</p>
+            </div>
+        </div>
+        <div class="left-profile" style="margin-left:5%;">
+            <div class="top">
+                <img th:src="@{/images/ava.png}" alt="ava">
+                <h5>David Bobby</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/mobile.png}" alt="mobile">
+                <h5>87758328845</h5>
+            </div>
+            <div class="top">
+                <img th:src="@{/images/home.png}" alt="home">
+                <h5>Asyl Arman 11/155</h5>
+            </div>
+            <div class="top2">
+            </div>
+            <div class="top3">
+                <p>I need a mantle for one day. Who has could you be kind to help me)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="white">
+    <div class="logo">
+    </div>
+    <h1>Write what you need.</h1>
+    <div class="btn">
+        Go to H2H
+    </div>
+</div>
+
+
+</body>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("myHeader");
+    var afterH = document.getElementById("afterHead");
+    var sticky = afterH.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
+
+</html>

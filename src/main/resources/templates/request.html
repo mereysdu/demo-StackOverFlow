@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Answers page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"  th:href="@{/css/main.css}">
+</head>
+<body>
+
+
+<div class="head" role="tablist">
+    <div class="head-words" id="myLogo">
+    </div>
+    <div class="head-words" >
+        <a th:href="@{/main}">Posts</a>
+    </div>
+    <div class="head-words">
+        <a href="#add-comment"  role="tab"  data-toggle="tab">Add post</a>
+    </div>
+    <div class="head-words">
+        <a href="#account-settings"  role="tab"  data-toggle="tab">Settings</a>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="head-words">
+        <a href="#admin"  role="tab"  data-toggle="tab">Admin page</a>
+    </div>
+    <div class="sign" >
+        <form class="login" th:action="@{/logout}" method="get">
+            <div class="submit">
+                <input type="submit" value="Logout">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="tab-content">
+            <div class="tab-pane active" id="comments-logout">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object img-circle" th:src="@{/images/ava.png}" alt="profile">
+                        </a>
+                        <div class="media-body">
+                            <div class="well well-lg">
+                                <h4 class="media-heading text-uppercase reviews"><a href="#" th:text="${post.title}"></a></h4>
+                                <ul class="media-date text-uppercase reviews list-inline">
+                                    <li class="dd" th:text="${post.date.dayOfMonth}">22</li>
+                                    <li class="mm" th:text="${post.date.month}"></li>
+                                    <li class="aaaa" th:text="${post.date.year}">2014</li>
+                                </ul>
+                                <p class="media-comment" th:text="${post.text}">
+                                </p>
+
+                                <a class="btn btn-info btn-circle text-uppercase"><span class="glyphicon glyphicon-heart"></span>Like</a>
+                                <a th:text="${#lists.size(post.comments)} + ' comments'" class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span></a>
+                            </div>
+                        </div>
+                        <div class="collapse" id="replyOne">
+                            <ul class="media-list">
+                                <li class="media media-replied" th:each="comment : ${post.comments}">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" th:src="@{/images/ava.png}" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 th:text="${comment.user.name} + ' ' + ${comment.user.surname}" class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span></h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd" th:text="${comment.date.dayOfMonth}"></li>
+                                                <li class="mm" th:text="${comment.date.month}"></li>
+                                                <li class="aaaa" th:text="${comment.date.year}"></li>
+                                            </ul>
+                                            <p class="media-comment" th:text="${comment.text}">
+                                            </p>
+                                            <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="media media-replied" id="replied">
+                                    <form th:action="@{'/posts/' + ${post.id} + '/comments'}" th:object="${commentForm}" method="post" class="form-horizontal" id="commentForm" role="form" >
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-8">
+                                                <input th:field="*{text}" class="form-control" name="addComment" id="addComment" rows="5" placeholder="add comment"></input>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-8">
+                                                <button class="btn btn-warning btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Comment </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
