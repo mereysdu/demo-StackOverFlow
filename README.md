@@ -1,1 +1,1 @@
-# demo-StackOverFlow
+Demo application like stackoverflow made using Spring MVC
